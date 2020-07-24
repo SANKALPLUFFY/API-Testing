@@ -9,8 +9,11 @@ import static org.hamcrest.Matchers.*;
 import java.util.Hashtable;
 import java.util.Random;
 
-import Files.Body;
-import Files.RandomString;
+import org.testng.Assert;
+
+import Utilities.Body;
+import Utilities.RandomString;
+import Utilities.Utilities;
 
 public class Main 
 {
@@ -38,7 +41,9 @@ public class Main
 		
 		 JS = new JsonPath(POSTResponse); // JsonPath takes Strig and converts it into jason file, thats why we stored response in string
 		
-		String Place_ID = JS.get("place_id");
+		//String PID = Utilities.JsonParsingMethod(POSTResponse,"place_id");
+		 
+		 String Place_ID = Utilities.JsonParsingMethod(POSTResponse,"place_id");
 		
 		System.out.println("Place id is: "+""+Place_ID);
 		
@@ -74,7 +79,7 @@ public class Main
 		
 		JS = new JsonPath(PUTResponse);
 		
-		String PUT_Message = JS.get("msg");
+		String PUT_Message =  Utilities.JsonParsingMethod(PUTResponse,"msg");
 		
 		//System.out.println("JSON PUT Response is:"+" "+PUT_Message);
 		
@@ -94,30 +99,21 @@ public class Main
 		
 		System.out.println(response.asString()); */
 		
-		String string="";
-			string = given().log().all().queryParam("place_id", Place_ID)
+		String 
+			GETResponse = given().log().all().queryParam("place_id", Place_ID)
 			.queryParam("key", "qaclick123")
 			
 			.when().get("maps/api/place/get/json")
 			
 			.then().log().all().extract().response().asString();
 		
-		JsonPath JS1 = new JsonPath(string);
-		
-		String update = JS1.getString("address");
+		String update = Utilities.JsonParsingMethod(GETResponse,"address");
 		
 		System.out.println(update);
 		
 		System.out.println(new_Address);
 		
-		if(new_Address.contentEquals(update))
-		{
-			System.out.println("Updated address is retrived from GET method");
-		}
-		else {
-			throw new Exception();
-		}
-		
+		Assert.assertEquals(new_Address, update);
 		
 	}
 }
