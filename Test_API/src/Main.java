@@ -76,11 +76,11 @@ public class Main
 		
 		String PUT_Message = JS.get("msg");
 		
-		System.out.println("JSON PUT Response is:"+" "+PUT_Message);
+		//System.out.println("JSON PUT Response is:"+" "+PUT_Message);
 		
 		//in get request we are not sending any body so don't neet to give header in request
 		
-		//working code
+		//-------------------------------------------------------working code
 		
 		/*Response response = 
 				given().log().all().queryParam("place_id", Place_ID)
