@@ -80,7 +80,7 @@ public class Main
 		
 		//in get request we are not sending any body so don't neet to give header in request
 		
-		//-------------------------------------------------working code
+		//working code
 		
 		/*Response response = 
 				given().log().all().queryParam("place_id", Place_ID)
