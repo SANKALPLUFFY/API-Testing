@@ -25,14 +25,12 @@ public class Main
 		String POSTResponse = given().log().all().queryParam("Key", "qaclick123").header("Content-Type", "application/json")
 		.body(Body.PostBody())
 		
-		//here using POST method
-		.when().post("maps/api/place/add/json")
+		
+		.when().post("maps/api/place/add/json")   //here using POST method
 		
 		//here validating the header response & extracting the response
-		.then().log().all().assertThat().statusCode(200).body("scope", equalTo("APP"))
+		.then().log().all().assertThat().statusCode(200).body("scope", equalTo("APP"))  /* equalTo method comes from static pachage hamcrest --> Matchers, so need to import it manually*/
 		.header("server", "Apache/2.4.18 (Ubuntu)").extract().response().asString();
-		
-		/* equalTo method comes from static pachage hamcrest --> Matchers, so need to import it manually*/
 		
 		// Next goal is to add a place, update the address and the get the updated details back
 		
@@ -41,8 +39,6 @@ public class Main
 		String Place_ID = JS.get("place_id");
 		
 		System.out.println("Place id is: "+""+Place_ID);
-		
-		//calling put method to change address for recently generated place ID
 		
 		Hashtable<Integer,String> table = new Hashtable<Integer,String>();
 		
@@ -67,7 +63,7 @@ public class Main
 		String PUTResponse = given().log().all().queryParam("Key","qaclick123").header("Content-Type","application/json")
 		.body(Body.PUTBody(Place_ID,new_Address))
 		
-		.when().put("/maps/api/place/update/json")
+		.when().put("/maps/api/place/update/json")  //calling put method to change address for recently generated place ID
 		
 		.then().assertThat().log().all().assertThat().statusCode(200).body("msg", equalTo("Address successfully updated")).header("Content-Length", "38")
 		.extract().response().asString();
