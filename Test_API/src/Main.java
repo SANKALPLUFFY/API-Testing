@@ -95,17 +95,12 @@ public class Main
 		System.out.println(response.asString()); */
 		
 		String string="";
-		try {
 			string = given().log().all().queryParam("place_id", Place_ID)
 			.queryParam("key", "qaclick123")
 			
 			.when().get("maps/api/place/get/json")
 			
 			.then().log().all().extract().response().asString();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		JsonPath JS1 = new JsonPath(string);
 		
