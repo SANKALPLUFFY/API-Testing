@@ -13,7 +13,7 @@ public class Rough
 				.when().get("/maps/api/place/get/json")
 		.then().log().all()
 		.extract().response();
-		System.out.println(response.getStatusCode());
+		//System.out.println(response.getStatusCode());
 		System.out.println(response.asString());
 	}
 }
