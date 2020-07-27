@@ -92,7 +92,7 @@ public class Parsing_Complex_JSON {
 		
 		String courseTitle=null;
 		
-		for(int j=1;j<4;j++)
+		for(int j=1;j<7;j++)
 		{
 			switch(j)
 			{
@@ -113,43 +113,31 @@ public class Parsing_Complex_JSON {
 					System.out.println("Purchase amount is:"+""+PurchaseAmount);
 					
 					break;
-				
+				 
 				case 3://3. Print Title of the first course
 					
 					//For particular course title we need to provide "course index.courseName" as path
 					
-					String firstHalfPath = "courses[";
-					
-					String secondHalfPath = "].title";
-					
-					for(int i=0;i<courseSize_Response;i++)
-					{
-						String path = firstHalfPath+i+secondHalfPath;
-						
-						courseTitle  = Utilities.ComplexJsonParsing_CourseTitle(DummyRequestResponse, path);
-						
-						if(i==0)
-						{
-							System.out.println(i+1+"st Title is"+" "+courseTitle);
-						}
-						else
-							if(i==1)
-							{
-								System.out.println(i+1+"nd Title is"+" "+courseTitle);
-							}
-							else
-								if(i==2)
-								{
-									System.out.println(i+1+"rd Title is"+" "+courseTitle);
-								}
-					}
+					Utilities.ComplexJsonParsing_CourseTitle(DummyRequestResponse, courseSize_Response);
 					
 					break;
-				
+					
+				case 4://4. Print All course titles and their respective Prices
+					
+					Utilities.ComplexJsonParsing_Course_Prices(DummyRequestResponse, courseSize_Response);
+					
+					break;
+					
+				case 5://5. Print no of copies sold by each Course
+					
+					Utilities.ComplexJsonParsing_Course_Sale(DummyRequestResponse, courseSize_Response);
+					
+					break;
+					
+				case 6://6. Verify if Sum of all Course prices matches with Purchase Amount
+					
+					Utilities.totalSaleOfAllCourses(DummyRequestResponse);
 			}
 		}
-		
-		
-
 	}
 }
